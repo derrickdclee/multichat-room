@@ -20,14 +20,15 @@ io.on('connection', (socket) => {
     console.log('User was disconnected');
   });
 
-  socket.emit('newMessage', {
-    from: 'Derrick Lee',
-    text: 'Hello this is a text email',
-    createdAt: 123
-  });
+  socket.on('createMessage', (message) => {
+    console.log(message);
 
-  socket.on('createMessage', (data) => {
-    console.log(data);
+    // emits to every connection
+    io.emit('newMessage', {
+      from: message.from,
+      test: message.text,
+      createdAt: new Date().getTime()
+    });
   });
 });
 
