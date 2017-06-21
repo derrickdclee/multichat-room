@@ -23,4 +23,6 @@ $('#message-form').on('submit', function(e) {
     text: $("input[name='message']").val()
   }, function(){
   });
+
+  ("input[name='message']").val('');
 });
