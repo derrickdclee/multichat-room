@@ -15,7 +15,21 @@ app.use(express.static(publicPath));
 
 // lets you listen for an event
 io.on('connection', (socket) => {
-  console.log('new user connected');
+  console.log('New user connected');
+
+  // emits to this socket only
+  socket.emit('newMessage', {
+    from: 'Admin',
+    text: 'Welcome to the chat app',
+    createdAt: new Date().getTime()
+  });
+
+  socket.broadcast.emit('newMessage', {
+    from: 'Admin',
+    text: 'New user joined the chat',
+    createdAt: new Date().getTime()
+  });
+
   socket.on('disconnect', () => {
     console.log('User was disconnected');
   });
@@ -26,9 +40,16 @@ io.on('connection', (socket) => {
     // emits to every connection
     io.emit('newMessage', {
       from: message.from,
-      test: message.text,
+      text: message.text,
       createdAt: new Date().getTime()
     });
+
+    // sends event to every socket but this
+    // socket.broadcast.emit('newMessage', {
+    //   from: message.from,
+    //   test: message.text,
+    //   createdAt: new Date().getTime()
+    // });
   });
 });
 
