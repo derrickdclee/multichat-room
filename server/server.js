@@ -26,10 +26,11 @@ io.on('connection', (socket) => {
     console.log('User was disconnected');
   });
 
-  socket.on('createMessage', (message) => {
+  socket.on('createMessage', (message, callback) => {
     console.log(message);
     // emits to every connection
     io.emit('newMessage', generateMessage(message.from, message.text));
+    callback('This message is coming from the server');
 
     // sends event to every socket but this
     // socket.broadcast.emit('newMessage', {
