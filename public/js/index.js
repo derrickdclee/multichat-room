@@ -24,5 +24,9 @@ $('#message-form').on('submit', function(e) {
   }, function(){
   });
 
+<<<<<<< HEAD
   $("input[name='message']").val('');
+=======
+  ("input[name='message']").val('');
+>>>>>>> 0a75dc33d244e3a888cb8b04852e4d40518e4524
 });
