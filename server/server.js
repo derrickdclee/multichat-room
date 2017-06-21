@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
     console.log(message);
     // emits to every connection
     io.emit('newMessage', generateMessage(message.from, message.text));
-    callback('This message is coming from the server');
+    callback();
 
     // sends event to every socket but this
     // socket.broadcast.emit('newMessage', {
